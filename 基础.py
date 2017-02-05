@@ -1,3 +1,4 @@
+from 函数 import my_abs
 print("hello world")
 100+200
 print('The quick brown fox', 'jumps over', 'the lazy dog')
