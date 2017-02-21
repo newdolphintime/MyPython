@@ -1,4 +1,6 @@
 import math
+import os
+import string
 print(abs(-20))
 
 print(max(1, 2))
@@ -75,3 +77,43 @@ person('Bob', 35, city='Beijing')
 extra = {'city': 'Beijing', 'job': 'Engineer'}
 print(extra['job'])
 person('Bob', 35, city='Beijing',job=extra['job'])
+
+
+#递归函数
+def fact(n):
+    if n==1:
+        return 1
+    return n * fact(n - 1)
+print(fact(5))
+def fact_iter(num, product):
+    if num == 1:
+        return product
+    return fact_iter(num - 1, num * product)
+
+print(fact_iter(5, 1))
+d={'a':1,'b':2,'c':'3'}
+for key in d:
+    print(key)
+
+for key in d.values():
+    print(key)
+for k, v in d.items():
+    print(k, v)
+for x,y in [(1,2),(2,3),(3,4)]:
+    print(x,y)
+print([x * x for x in range(1, 11)])
+print([x * x for x in range(1, 11) if x % 2 == 0])
+print([m + n for m in 'ABC' for n in 'XYZ'])
+print([d for d in os.listdir('.')])
+#转小写
+L = ['Hello', 'World', 'IBM', 'Apple']
+print([s.lower() for s in L])
+L1=['我','特','么','饿','了']
+L2=[s+' !' for s in L1]
+str_convert = ''.join(L2)
+print(str_convert)
+str='但是 我饿了啊 fuck'
+list = list(str)
+L2=[s+' !' for s in list]
+str_convert = ''.join(L2)
+print(str_convert)
