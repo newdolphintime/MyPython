@@ -13,4 +13,3 @@ for name in nameList:
     album=name.get_text()
     url = name['href']
     print(album,url)
-#print(req.content.decode('utf-8'))
