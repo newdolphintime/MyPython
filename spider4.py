@@ -7,10 +7,27 @@ headers = {'User-Agent' : 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Geck
         'Content-Type': 'application/x-www-form-urlencoded',
         'Connection' : 'Keep-Alive',
         'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}
-req = requests.get(url=url, headers=headers)
-print(req.content)
-bsObj = BeautifulSoup(req.content, "html.parser")
 
-nameList = bsObj.findAll("link", {"rel":"next"})
-for name in nameList:
-    print(name["href"])
+photoAdress=set()
+
+while url is not None:
+    req = requests.get(url=url, headers=headers)
+    bsObj = BeautifulSoup(req.content, "html.parser")
+    name = bsObj.find("link", {"rel": "next"})
+    photoList = bsObj.findAll("td", {"valign": "TOP"})
+    for photo in photoList:
+        photoAdress.add(photo.a['href'])
+    if name is not None:
+        url = name["href"]
+        print(url)
+    else:
+        url=None
+print(len(photoAdress))
+print(photoAdress)
+
+for jpgadress in photoAdress:
+    url=baseurl+jpgadress
+    req = requests.get(url=url, headers=headers)
+    bsObj = BeautifulSoup(req.content, "html.parser")
+    jpgname = bsObj.find("a", {"class":"smallblack"})
+    print(jpgname['href'])
