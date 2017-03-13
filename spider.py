@@ -1,8 +1,9 @@
+#经过分析得出结果 还是日文界面的东西好提取！
 import requests
 import urllib.request
 from bs4 import BeautifulSoup
 baseurl='http://www.bobx.com'
-url = '/idol/yoshioka-riho'
+url = '/av-idol/mikami-yua/'
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
                          'Chrome/51.0.2704.63 Safari/537.36'}
 req = requests.get(url=baseurl+url, headers=headers)
