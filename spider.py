@@ -13,8 +13,9 @@ for name in nameList:
     album=name.get_text()
     url = name['href']
     print('-------------------------------------------------------------------------------------------')
-    print(album,baseurl+url)
+    print(album)
     print('-------------------------------------------------------------------------------------------')
+    print(baseurl+url)
     url=baseurl+url
     photoAdress=set()
     while url is not None:
