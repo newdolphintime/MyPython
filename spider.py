@@ -12,4 +12,29 @@ nameList = bsObj.findAll("a", {"class":"medblack"})
 for name in nameList:
     album=name.get_text()
     url = name['href']
-    print(album,url)
+    print('-------------------------------------------------------------------------------------------')
+    print(album,baseurl+url)
+    print('-------------------------------------------------------------------------------------------')
+    url=baseurl+url
+    photoAdress=set()
+    while url is not None:
+        req = requests.get(url=url, headers=headers)
+        bsObj = BeautifulSoup(req.content, "html.parser")
+        name = bsObj.find("link", {"rel": "next"})
+        photoList = bsObj.findAll("td", {"valign": "TOP"})
+        for photo in photoList:
+            photoAdress.add(photo.a['href'])
+        if name is not None:
+            url = name["href"]
+            print(url)
+        else:
+            url=None
+    print(len(photoAdress))
+    print(photoAdress)
+
+    for jpgadress in photoAdress:
+        url=baseurl+jpgadress
+        req = requests.get(url=url, headers=headers)
+        bsObj = BeautifulSoup(req.content, "html.parser")
+        jpgname = bsObj.find("a", {"class":"smallblack"})
+        print(baseurl+jpgname['href'])
