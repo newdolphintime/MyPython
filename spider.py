@@ -9,7 +9,11 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.3
 req = requests.get(url=baseurl+url, headers=headers)
 
 bsObj = BeautifulSoup(req.content, "html.parser")
+nojpUrl = bsObj.find("img", {"name":"gsplitjp"})
 nameList = bsObj.findAll("a", {"class":"medblack"})
+if nojpUrl is not None:
+    print("请切换日链")
+    exit()
 for name in nameList:
     album=name.get_text()
     url = name['href']
