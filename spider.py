@@ -29,11 +29,13 @@ def mkdir(path):
 #############################################
 baseurl='http://www.bobx.com'
 url = '/idol/yoshioka-riho/'
-headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
-                         'Chrome/51.0.2704.63 Safari/537.36'}
+headers = {'User-Agent' : 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Connection' : 'Keep-Alive',
+        'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}
 req = requests.get(url=baseurl+url, headers=headers)
 
-bsObj = BeautifulSoup(req.content, "html.parser")
+bsObj = BeautifulSoup(req.content, 'html5lib')
 nojpUrl = bsObj.find("img", {"name":"gsplitjp"})
 nameList = bsObj.findAll("a", {"class":"medblack"})
 if nojpUrl is not None:
@@ -57,7 +59,7 @@ for name in nameList:
     photoAdress=set()
     while url is not None:
         req = requests.get(url=url, headers=headers)
-        bsObj = BeautifulSoup(req.content, "html.parser")
+        bsObj = BeautifulSoup(req.content, 'html5lib')
         name = bsObj.find("link", {"rel": "next"})
         photoList = bsObj.findAll("td", {"valign": "TOP"})
         for photo in photoList:
@@ -70,17 +72,20 @@ for name in nameList:
     print(len(photoAdress))
     print(photoAdress)
     filepath = branchpath + "\\" + album + ".txt"
-    f = open(filepath,'w')
+    jpgAdressSet=set()
     for jpgadress in photoAdress:
         url=baseurl+jpgadress
         req = requests.get(url=url, headers=headers)
-        bsObj = BeautifulSoup(req.content, "html.parser")
+        bsObj = BeautifulSoup(req.content, 'html5lib')
         jpgname = bsObj.find("a", {"class":"smallblack"})
         print(baseurl+jpgname['href'])
         str=baseurl+jpgname['href']+"\n"
-        f.write(str)
-        f.flush()
-        print("写入成功")
+        jpgAdressSet.add(str)
+
+    f = open(filepath, 'w')
+    f.writelines(jpgAdressSet)
+    f.flush()
+    print("写入成功")
     f.close()
 
 
