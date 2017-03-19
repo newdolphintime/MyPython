@@ -28,7 +28,7 @@ def mkdir(path):
 #################开始采集数据##################
 #############################################
 baseurl='http://www.bobx.com'
-url = '/idol/yoshioka-riho/'
+url = '/idol/takeda-rena/'
 headers = {'User-Agent' : 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0',
         'Content-Type': 'application/x-www-form-urlencoded',
         'Connection' : 'Keep-Alive',
