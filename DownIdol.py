@@ -1,5 +1,6 @@
 import os
 import os.path
+import wget
 rootdir = "D:\\写真\\yoshioka-riho"                               # 指明被遍历的文件夹
 pathSet=set()
 for parent,dirnames,filenames in os.walk(rootdir):    #三个参数：分别返回1.父目录 2.所有文件夹名字（不含路径） 3.所有文件名字
@@ -12,7 +13,11 @@ for parent,dirnames,filenames in os.walk(rootdir):    #三个参数：分别返�
 for path in pathSet:
     print ('--------'+path+'--------')
     print(os.path.split(path)[0])
+    basePath=os.path.split(path)[0]
     f = open(path, 'r')
     for line in f.readlines():
         print(line.strip())
+        print(basePath+'\\'+line.split('/')[-1])
+        filePath=basePath+'\\'+line.split('/')[-1]
+
     f.close()
