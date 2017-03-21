@@ -7,7 +7,7 @@ headers = {'User-Agent' : 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Geck
         'Content-Type': 'application/x-www-form-urlencoded',
         'Connection' : 'Keep-Alive',
         'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}
-rootdir = "D:\\写真\\yoshioka-riho\\WPB 2015 #27"                               # 指明被遍历的文件夹
+rootdir = "D:\\yoshioka-riho\\WPB 2015 #27"                               # 指明被遍历的文件夹
 pathSet=set()
 for parent,dirnames,filenames in os.walk(rootdir):    #三个参数：分别返回1.父目录 2.所有文件夹名字（不含路径） 3.所有文件名字
     for filename in filenames:                        #输出文件信息
