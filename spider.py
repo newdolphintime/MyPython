@@ -43,7 +43,7 @@ if nojpUrl is not None:
     exit()
 path=url.split("/")
 # 定义要创建的目录
-mainpath = "d:\\"+path[2]
+mainpath = "d:\\写真\\"+path[2]
 # 调用函数
 mkdir(mainpath)
 for name in nameList:
