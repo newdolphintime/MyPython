@@ -1,13 +1,13 @@
 import requests
 import mysql.connector
 from bs4 import BeautifulSoup
-conn = mysql.connector.connect(user='photo', password='photo', database='photo')
+conn = mysql.connector.connect(user='photo', password='photo', database='photo' ,port='3307')
 cursor = conn.cursor()
 #############################################
-#################开始采集数据##################
+#################开始采集数据#################
 #############################################
 baseurl='http://www.bobx.com'
-url = '/idol/takeda-rena/'
+url = '/idol/alisa-alisa/jp_index.html'
 headers = {'User-Agent' : 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0',
         'Content-Type': 'application/x-www-form-urlencoded',
         'Connection' : 'Keep-Alive',
@@ -58,8 +58,7 @@ for name in nameList:
         print(baseurl+jpgname['href'])
         donwloadadress=baseurl+jpgname['href']
         cursor.execute('insert into idol (idol, album,photolink) select %s,%s,%s from dual where  not exists (SELECT *FROM idol WHERE photolink = %s)', [idol, album , donwloadadress, donwloadadress])
-
-    conn.commit()
+        conn.commit()
     print("写入成功")
 cursor.close()
 conn.close()
